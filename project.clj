@@ -10,7 +10,8 @@
                  [org.clojure/clojurescript "1.9.229"]
                  [org.clojure/core.async  "0.3.442"
                   :exclusions [org.clojure/tools.reader]]
-                 [reagent "0.6.0"]]
+                 [reagent "0.6.0"]
+                 [cljs-ajax "0.6.0"]]
 
   :plugins [[lein-figwheel "0.5.10"]
             [lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
@@ -53,7 +54,7 @@
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
 
-             :css-dirs ["resources/public/css"] ;; watch and update CSS
+             :css-dirs ["resources/public/css"]} ;; watch and update CSS
 
              ;; Start an nREPL server into the running figwheel process
              ;; :nrepl-port 7888
@@ -86,7 +87,7 @@
 
              ;; to pipe all the output to the repl
              ;; :server-logfile false
-             }
+
 
 
   ;; setting up nREPL for Figwheel and ClojureScript dev

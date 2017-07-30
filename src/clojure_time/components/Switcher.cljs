@@ -1,5 +1,8 @@
 (ns clojure-time.switcher
-  (:require [clojure-time.config :refer [templates update-current!]]))
+  (:require [clojure-time.config :refer [templates]]
+            [clojure-time.state :refer [update-current!]]))
+
+
 
 (def button-style {:padding 2 :margin 4})
 (def selected-style (merge button-style {:backgroundColor "aliceblue"}))
@@ -13,7 +16,7 @@
 (defn map-template [current template]
       [templater {:key (:name template)
                   :name (:name template)
-                  :current current} ])
+                  :current current}])
 
 (defn switcher [current]
       [:div {:style style} (map (partial  map-template current) templates)])

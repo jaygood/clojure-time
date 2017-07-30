@@ -1,2 +1,7 @@
-/* some style */
-
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+iframe {  border: none;  width: 100%;  }
+textarea { box-sizing: border-box; }
