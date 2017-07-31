@@ -1,5 +1,5 @@
 (ns clojure-time.app
-  (:require [reagent.core :as reagent :refer [atom]]
+  (:require [reagent.core :as reagent :refer [atom cursor]]
             [clojure-time.state :refer [app-state]]
             [clojure-time.config :refer [templates]]
             [clojure-time.options :refer [options]]
@@ -12,8 +12,8 @@
 (.appendChild (.-body js/document)
               (js/Object.assign (.createElement js/document "script") #js {:src "//tia.timeinc.net/static/jd/tia.js"}))
 
-(defn app []
-  (let [opts (:options @app-state) current (:current @app-state)]
+(defn app [config]
+  (let [opts (cursor app-state [:options]) current (cursor app-state [:current])]
        [:div
         [switcher current]
         [options opts opts]

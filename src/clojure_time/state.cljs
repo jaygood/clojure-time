@@ -1,6 +1,6 @@
 (ns clojure-time.state
   (:require [reagent.core :refer [atom]]
-            [clojure-time.config :refer [templates base-path css-regex html-regex]]
+            [clojure-time.config :refer [templates base-path file-path css-regex html-regex]]
             [ajax.core :refer [GET]]))
 
 (enable-console-print!)
@@ -23,19 +23,19 @@
     (update-options! options)))
 
 (defn switch-template! [name]
-  (GET (str base-path name "/iframe.html") {:handler handler!})
+  (GET (str base-path name file-path) {:handler handler!})
   (aset js/window.location "hash" name))
 
-(defn update-current! [f & args]
+(defn update-current! [current f & args]
   (let [name (apply f args)]
     (switch-template! name)
-    (apply swap! app-state update-in [:current] f args)))
+    (swap! current f)))
 
 (defn poster [options]
   (.postMessage (.-contentWindow (.-iframer (.-frames js/window))) (.stringify js/JSON (clj->js {:type "STYLER_MODE" :payload {:options options}})) "*"))
 
-(defn update-option! [{:keys [name value]}]
-  (poster (:options (swap! app-state update-in [:options] (fn [options] (assoc options name value))))))
+(defn update-option! [{:keys [opts name value]}]
+  (poster (swap! opts update-in [name] (fn [] value))))
 
 ;(apply swap! app-state update-in [:current] f args))
 

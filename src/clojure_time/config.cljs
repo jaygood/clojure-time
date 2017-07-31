@@ -3,6 +3,7 @@
 
 (def dev-mode true)
 (def base-path "https://tia.timeinc.net/static/jd/")
+(def file-path "/iframe.html")
 (def css-regex #"/\*\s\"?'?\\?\[%(.*)%]\"?'?\s\*/\s([^;]*)")
 (def html-regex #"<!--\s\\?\[%(.*)%]\s-->\s([^<]*)")
 (def templates [
@@ -14,3 +15,5 @@
                 {:name "adapt-video-native-nogo"}
                 {:name "adapt-image-native-nogo"}
                 {:name "adapt-zoom"}])
+
+(def config {:base-path base-path :file-path file-path :css-regex css-regex :html-regex html-regex :templates templates})
