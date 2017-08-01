@@ -44,7 +44,7 @@
                ;; lein cljsbuild once min
                {:id "min"
                 :source-paths ["src"]
-                :compiler {:output-to "resources/public/js/compiled/clojure_time.js"
+                :compiler {:output-to "index.js"
                            :main clojure-time.core
                            :optimizations :advanced
                            :pretty-print false}}]}

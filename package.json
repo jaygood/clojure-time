@@ -1,6 +1,6 @@
 {
   "name": "clojure-time",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Project",
   "main": "resources/public/js/compiled/out/clojure_time.js",
   "scripts": {
