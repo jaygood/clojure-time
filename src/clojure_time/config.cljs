@@ -1,7 +1,6 @@
 (ns clojure-time.config
-      (:require [reagent.core :refer [atom]]))
+  (:require [reagent.core :refer [atom]]))
 
-(def dev-mode true)
 (def base-path "https://tia.timeinc.net/static/jd/")
 (def file-path "/iframe.html")
 (def css-regex #"/\*\s\"?'?\\?\[%(.*)%]\"?'?\s\*/\s([^;]*)")
@@ -16,4 +15,4 @@
                 {:name "adapt-image-native-nogo"}
                 {:name "adapt-zoom"}])
 
-(def config {:base-path base-path :file-path file-path :css-regex css-regex :html-regex html-regex :templates templates})
+(def config #js {:base-path base-path :file-path file-path :css-regex css-regex :html-regex html-regex :templates templates})

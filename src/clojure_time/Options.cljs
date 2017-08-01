@@ -12,5 +12,5 @@
                    :value (get @opts opt)
                    :onChange (fn [e] (update-option! {:opts opts :name opt :value (.-value (.-target e))}))}]])
 
-(defn options [opts]
+(defn options [config opts]
       [:div (map (partial option opts) (keys @opts))])

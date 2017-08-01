@@ -5,39 +5,30 @@
 
 (enable-console-print!)
 
-;; define your app data so that it doesn't get over-written on reload
-(defonce app-state (atom {
-                          :options {}
-                          :templates templates
-                          :current (:name (nth templates 0))}))
-
 (defn create-regex-map [reg res]
   (reduce (fn [r [_ k v]] (if (and (not= "''" v) (not= "" v)) (assoc r k (clojure.string/replace v #"['\"]" "")) r)) {} (re-seq reg res)))
 
-(defn update-options! [options]
-  (swap! app-state update-in [:options] (fn [] options)))
+(defn update-options! [state options]
+  (swap! state update-in [:options] (fn [] options)))
 
-(defn handler! [response]
+(defn handler! [state response]
   (let [options (merge (create-regex-map css-regex response) (create-regex-map html-regex response))]
-    (.dir js/console (clj->js options))
-    (update-options! options)))
+    (update-options! state options)))
 
-(defn switch-template! [name]
-  (GET (str base-path name file-path) {:handler handler!})
+(defn switch-template! [state name]
+  (GET (str base-path name file-path) {:handler (partial handler! state)})
   (aset js/window.location "hash" name))
 
-(defn update-current! [current f & args]
+(defn update-current! [state current f & args]
   (let [name (apply f args)]
-    (switch-template! name)
+    (switch-template! state name)
     (swap! current f)))
 
 (defn poster [options]
-  (.postMessage (.-contentWindow (.-iframer (.-frames js/window))) (.stringify js/JSON (clj->js {:type "STYLER_MODE" :payload {:options options}})) "*"))
+  (.postMessage (.-contentWindow (.getElementById (.-document js/window) "iframer")) (.stringify js/JSON (clj->js {:type "STYLER_MODE" :payload {:options options}})) "*"))
 
 (defn update-option! [{:keys [opts name value]}]
   (poster (swap! opts update-in [name] (fn [] value))))
 
 ;(apply swap! app-state update-in [:current] f args))
 
-; FIXME call in didMount or somethin
-(switch-template! (:current @app-state))

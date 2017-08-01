@@ -1,4 +1,4 @@
-(defproject clojure-time "0.1.0-SNAPSHOT"
+(defproject clojure-time "1.0.0"
   :description "Iframe reload"
   :url "https://github.com/jaygood/clojure-time"
   :license {:name "Eclipse Public License"
@@ -11,7 +11,9 @@
                  [org.clojure/core.async  "0.3.442"
                   :exclusions [org.clojure/tools.reader]]
                  [reagent "0.6.0"]
-                 [cljs-ajax "0.6.0"]]
+                 [cljs-ajax "0.6.0"]
+                 [binaryage/devtools "0.9.4"]]
+
 
   :plugins [[lein-figwheel "0.5.10"]
             [lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
@@ -26,17 +28,14 @@
                 ;; will cause figwheel to inject the figwheel client
                 ;; into your build
                 :figwheel {:on-jsload "clojure-time.core/on-js-reload"
-                           ;; :open-urls will pop open your application
-                           ;; in the default browser once Figwheel has
-                           ;; started and complied your application.
-                           ;; Comment this out once it no longer serves you.
-                           :open-urls ["http://localhost:3449/index.html"]}
+                           :open-urls ["http://localhost:3449/"]}
 
                 :compiler {:main clojure-time.core
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/clojure_time.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true
+                           :source-map true
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools
                            :preloads [devtools.preload]}}
