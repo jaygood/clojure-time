@@ -5,16 +5,17 @@
 (def selected-style (merge button-style {:backgroundColor "aliceblue"}))
 (def style {:textAlign "center" :margin 6})
 
-(defn templater [{:keys [name current state]}]
+(defn templater [{:keys [name current state config]}]
       [:button {:style (if (= name @current) selected-style button-style)
-                :onClick #(update-current! state current (fn [] name))}
+                :onClick #(update-current! config state current (fn [] name))}
        name])
 
-(defn map-template [state current template]
+(defn map-template [state config current template]
       [templater {:key (:name template)
                   :state state
+                  :config config
                   :name (:name template)
                   :current current}])
 
 (defn switcher [config state current]
-      [:div {:style style} (map (partial  map-template state current) (:templates config))])
+      [:div {:style style} (map (partial map-template state config current) (:templates config))])
