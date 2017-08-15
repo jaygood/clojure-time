@@ -6,11 +6,12 @@
 (def text-style {:width "100%"})
 
 (defn option [opts opt]
-      [:div {:style style :key opt}
-       [:span {:style span-style} opt]
-       [:textarea {:style text-style
-                   :value (get @opts opt)
-                   :onChange (fn [e] (update-option! {:opts opts :name opt :value (.-value (.-target e))}))}]])
+  [:div {:style style :key opt}
+   [:span {:style span-style} opt]
+   [:textarea {:style text-style
+               :value (get @opts opt)
+               :onChange (fn [e] (update-option! {:opts opts :name opt :value (.-value (.-target e))}))}]])
 
 (defn options [config opts]
-      [:div (map (partial option opts) (keys @opts))])
+  [:div (doall (map (partial option opts) (keys @opts)))])
+
