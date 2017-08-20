@@ -1,6 +1,5 @@
 (ns clojure-time.state
-  (:require [reagent.core :refer [atom]]
-            [ajax.core :refer [GET]]))
+  (:require [ajax.core :refer [GET]]))
 
 (enable-console-print!)
 
