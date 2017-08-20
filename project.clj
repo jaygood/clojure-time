@@ -36,7 +36,7 @@
                            :preloads [devtools.preload]}}
                {:id "min"
                 :source-paths ["src"]
-                :compiler {:output-to "resources/public/js/compiled/clojure_time.min.js"
+                :compiler {:output-to "resources/public/js/compiled/clojure_time.js"
                            :main clojure-time.core
                            :optimizations :advanced
                            :pretty-print false}}]}

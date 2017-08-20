@@ -1,4 +1,4 @@
-(ns clojure-time.iframe)
+(ns clojure-time.components.iframe)
 
 (def style {:maxWidth 728 :maxHeight 728 :height "110vw"})
 

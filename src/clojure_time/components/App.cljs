@@ -1,8 +1,8 @@
-(ns clojure-time.app
+(ns clojure-time.components.app
   (:require [reagent.core :as reagent :refer [atom cursor]]
-            [clojure-time.options :refer [options]]
-            [clojure-time.iframe :refer [iframe]]
-            [clojure-time.switcher :refer [switcher]]))
+            [clojure-time.components.options :refer [options]]
+            [clojure-time.components.iframe :refer [iframe]]
+            [clojure-time.components.switcher :refer [switcher]]))
 
 (enable-console-print!)
 

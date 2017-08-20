@@ -1,7 +1,7 @@
 (ns clojure-time.core
   (:require [reagent.core :as reagent]
             [clojure-time.state :refer [switch-template!]]
-            [clojure-time.app :refer [app]]))
+            [clojure-time.components.app :refer [app]]))
 
 (defn clojin-time [c] (let [conf (js->clj c :keywordize-keys true)
                             app-state (reagent/atom {:options {}

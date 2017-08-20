@@ -1,4 +1,4 @@
-(ns clojure-time.switcher
+(ns clojure-time.components.switcher
   (:require [clojure-time.state :refer [update-current!]]))
 
 (def button-style {:padding 2 :margin 4})

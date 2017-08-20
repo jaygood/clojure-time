@@ -1,4 +1,4 @@
-(ns clojure-time.options
+(ns clojure-time.components.options
   (:require [clojure-time.state :refer [update-option!]]))
 
 (def style {:display "flex"})
