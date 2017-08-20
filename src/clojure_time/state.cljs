@@ -1,8 +1,6 @@
 (ns clojure-time.state
   (:require [ajax.core :refer [GET]]))
 
-(enable-console-print!)
-
 (defn create-regex-map [reg res]
   (reduce (fn [r [_ k v]] (if (and (not= "''" v) (not= "" v)) (assoc r k (clojure.string/replace v #"['\"]" "")) r)) {} (re-seq reg res)))
 
