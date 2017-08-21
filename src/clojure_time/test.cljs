@@ -1,10 +1,20 @@
 (ns clojure-time.test
-  (:require [cljs.test]
+  (:require [doo.runner :refer-macros [doo-tests]]
+            [cljs.test]
             [clojure-time.core-test]
             [clojure-time.components.app-test]
             [clojure-time.components.switcher-test]
             [clojure-time.components.options-test]
             [clojure-time.components.iframe-test]))
+
+(enable-console-print!)
+
+; TODO don't run when required in repl
+(doo-tests 'clojure-time.core-test
+           'clojure-time.components.options-test
+           'clojure-time.components.switcher-test
+           'clojure-time.components.app-test
+           'clojure-time.components.iframe-test)
 
 ;(defn run-tests []
 ;  (doall
@@ -15,8 +25,8 @@
 
 ; FIXME why am I spellin this all out?
 (defn run-tests []
-  (cljs.test/run-tests 'clojure-time.core-test)
-  (cljs.test/run-tests 'clojure-time.components.app-test)
-  (cljs.test/run-tests 'clojure-time.components.options-test)
-  (cljs.test/run-tests 'clojure-time.components.switcher-test)
-  (cljs.test/run-tests 'clojure-time.components.iframe-test))
+  (cljs.test/run-tests 'clojure-time.core-test
+                       'clojure-time.components.options-test
+                       'clojure-time.components.switcher-test
+                       'clojure-time.components.app-test
+                       'clojure-time.components.iframe-test))

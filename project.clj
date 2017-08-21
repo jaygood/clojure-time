@@ -12,16 +12,24 @@
                   :exclusions [org.clojure/tools.reader]]
                  [reagent "0.6.0"]
                  [cljs-ajax "0.6.0"]
+                 [lein-doo "0.1.6"]
                  [binaryage/devtools "0.9.4"]]
 
 
   :plugins [[lein-figwheel "0.5.10"]
+            [lein-doo "0.1.6"]
             [lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
 
   :source-paths ["src"]
 
   :cljsbuild {:builds
-              [{:id "dev"
+              [{:id "test"
+                :source-paths ["src"]
+                :compiler {:main clojure-time.test
+                           :output-to
+                                 "resources/public/js/compiled/testing_test.js"
+                           :optimizations :none}}
+               {:id "dev"
                 :source-paths ["src"]
 
                 :figwheel {:on-jsload "clojure-time.core/on-js-reload"
