@@ -15,11 +15,11 @@
                  [lein-doo "0.1.6"]
                  [binaryage/devtools "0.9.4"]]
 
-
   :plugins [[lein-figwheel "0.5.10"]
             [lein-doo "0.1.6"]
             [lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
 
+  :language-in  :ecmascript-next
   :source-paths ["src"]
 
   :cljsbuild {:builds

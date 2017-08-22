@@ -15,7 +15,7 @@
 
 (deftest async-stuff
   (async done
-    (-> (goog.Promise. #(% 12))
+    (-> (js/Promise. #(% 12))
         (.then #(is (= % 12)))
         (.then #(println "promised"))
         (.then done))))
