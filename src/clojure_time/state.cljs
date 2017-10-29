@@ -12,9 +12,22 @@
   (let [options (merge (create-regex-map (:css-regex config) response) (create-regex-map (:html-regex config) response))]
     (update-options! state options)))
 
+(defn create-iframe [content]
+  (-> (js/document.createElement "iframe")
+      (js/Object.assign #js{:sandbox "allow-scripts"
+                            :srcdoc content
+                            :referrerpolicy "origin"
+                            :id "iframer2"})
+      (->> (.appendChild (js/document.getElementById "div-id2")))))
+
+(defn update-iframe! [state srcdoc]
+  (swap! state update-in [:srcdoc] (fn [] srcdoc)))
+
+
 (defn switch-template! [config state name]
-  (GET (str (:base-path config) name (:file-path config)) {:handler (partial handler! config state)})
-  (aset js/window.location "hash" name))
+  (do (.then ((:render config) name) (partial update-iframe! state))
+      (GET (str (:base-path config) name (:file-path config)) {:handler (partial handler! config state)})
+      (aset js/window.location "hash" name)))
 
 (defn update-current! [config state current f & args]
   (let [name (apply f args)]
