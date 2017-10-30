@@ -1,5 +1,6 @@
 (ns clojure-time.state
-  (:require [ajax.core :refer [GET]]))
+  (:require [ajax.core :refer [GET]])
+  (:import [goog.async Debouncer]))
 
 ;FIXME quit passin config and state to updaters
 (defn update-iframe! [state srcdoc]
@@ -7,6 +8,8 @@
 
 (defn render-template! [config state name props]
   (.then ((:render config) name props) (partial update-iframe! state)))
+
+(def debounced-render-template! (Debouncer. render-template! 200))
 
 (defn switch-template! [config state name]
   (render-template! config state name {})
@@ -20,7 +23,7 @@
 (defn update-option! [config state {:keys [opts name value]}]
   (println "opts" name opts)
   (let [options (swap! opts update-in [name] (fn [] value))]
-    (render-template! config state (:current @state) options)))
+    (.fire debounced-render-template! config state (:current @state) options)))
 
 ;(apply swap! app-state update-in [:current] f args))
 
