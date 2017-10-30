@@ -5,13 +5,13 @@
 (def span-style {:textAlign "right" :width 150 :display "inline-block" :flexShrink 0})
 (def text-style {:width "100%"})
 
-(defn option [opts opt]
+(defn option [config state opts opt]
   [:div {:style style :key opt}
    [:span {:style span-style} opt]
    [:textarea {:style text-style
                :value (get @opts opt)
-               :onChange (fn [e] (update-option! {:opts opts :name opt :value (.-value (.-target e))}))}]])
+               :onChange (fn [e] (update-option! config state {:opts opts :name opt :value (.-value (.-target e))}))}]])
 
-(defn options [config opts]
-  [:div (doall (map (partial option opts) (keys @opts)))])
-
+(defn options [config state opts]
+  ; TODO clojure.string/blank?
+  [:div (doall (map (partial option config state opts) (keys @opts)))])

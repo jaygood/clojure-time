@@ -5,12 +5,12 @@
             [clojure-time.components.switcher :refer [switcher]]))
 
 (defn app [config state]
-  (let [opts (cursor state [:options])
+  (let [opts (cursor state [:current-t])
         srcdoc (cursor state [:srcdoc])
         current (cursor state [:current])]
     [:div
      [switcher config state current]
-     [options config opts]
+     [options config state opts]
      [:div {:id "div-id"}
       [:div
        [iframe srcdoc]]]]))

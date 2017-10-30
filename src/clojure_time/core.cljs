@@ -2,13 +2,15 @@
   (:require [reagent.core :as reagent]
             [clojure-time.state :refer [switch-template!]]
             [clojure-time.components.app :refer [app]]))
+(enable-console-print!)
 
 (defn clojin-time [conf]
   (let [app-state (reagent/atom {:options {}
                                  :templates (:templates conf)
+                                 :current-t (nth (:templates conf) 0) ;TODO
                                  :current (let [hash (.-hash js/location)]
                                             (if (clojure.string/blank? hash)
-                                              (:name (nth (:templates conf) 0))
+                                              (:TEMPLATE (nth (:templates conf) 0))
                                               (subs hash 1)))})]
     ; FIXME call in didMount or somethin
     (do (switch-template! conf app-state (:current @app-state))

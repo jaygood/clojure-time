@@ -6,16 +6,16 @@
 (def style {:textAlign "center" :margin 6})
 
 (defn templater [{:keys [name current state config]}]
-      [:button {:style (if (= name @current) selected-style button-style)
-                :onClick #(update-current! config state current (fn [] name))}
-       name])
+  [:button {:style (if (= name @current) selected-style button-style)
+            :onClick #(update-current! config state current (fn [] name))}
+   name])
 
 (defn map-template [state config current template]
-      [templater {:key (:name template)
-                  :state state
-                  :config config
-                  :name (:name template)
-                  :current current}])
+  [templater {:key (:TEMPLATE template)
+              :state state
+              :config config
+              :name (:TEMPLATE template)
+              :current current}])
 
 (defn switcher [config state current]
-      [:div {:style style} (map (partial map-template state config current) (:templates config))])
+  [:div {:style style} (map (partial map-template state config current) (:templates config))])
