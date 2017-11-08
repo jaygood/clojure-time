@@ -4,7 +4,7 @@
             [clojure-time.core-test]
             [clojure-time.components.app-test]
             [clojure-time.components.switcher-test]
-            [clojure-time.components.options-test]
+;            [clojure-time.components.options-test]
             [clojure-time.components.iframe-test]))
 
 (enable-console-print!)
