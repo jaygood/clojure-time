@@ -23,12 +23,13 @@
   :source-paths ["src"]
 
   :cljsbuild {:builds
-              [{:id "test"
-                :source-paths ["src"]
-                :compiler {:main clojure-time.test
-                           :output-to
-                                 "resources/public/js/compiled/testing_test.js"
-                           :optimizations :none}}
+              [
+;                {:id "test"
+;                :source-paths ["src"]
+;                :compiler {:main clojure-time.test
+;                           :output-to
+;                                 "resources/public/js/compiled/testing_test.js"
+;                           :optimizations :none}}
                {:id "dev"
                 :source-paths ["src"]
 
